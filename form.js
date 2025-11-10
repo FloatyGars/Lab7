@@ -74,7 +74,7 @@ form.addEventListener("submit", function (e) {
   }
 
   if (valid) {
-    alert(`Registration Successful!\nDerived Age: ${calculateAge(birthdateInput.value)} years old `);
+    alert(`Registration Successful! `);
     form.reset();
     ageDisplay.textContent = "";
   }

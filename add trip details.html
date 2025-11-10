@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Edit Trip Details - Financial and Operational Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #3f51b5, #7986cb);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Geometric patterns */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><line x1="0" y1="0" x2="100%" y2="100%" stroke="%23b3e5fc" stroke-width="1" opacity="0.2"/><line x1="100%" y1="0" x2="0" y2="100%" stroke="%23b3e5fc" stroke-width="1" opacity="0.2"/><polygon points="0,0 20%,50% 0,100%" fill="%23b3e5fc" opacity="0.1"/></svg>') repeat;
+        }
+        h2 {
+            color: #00e5ff;
+            text-align: center;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        form {
+            background: rgba(63, 81, 181, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #fff;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #303f9f;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        input::placeholder, select::placeholder, textarea::placeholder {
+            color: #b3e5fc;
+        }
+        button {
+            background-color: #00e5ff;
+            color: #3f51b5;
+            padding: 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #00b8d4;
+        }
+        .error {
+            color: #ff1744;
+            font-size: 0.9em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        input:invalid, select:invalid {
+            border: 1px solid #ff1744;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Major Form 1: Add/Edit Trip Details -->
+    <h2>Add Trip Details</h2>
+    <form id="tripForm">
+        <img class="logo" src="assets/Logo.jpg" alt="Baclaran Metrolink Bus Corporation Logo">
+        <label for="busId">Bus ID:</label>
+        <select id="busId" required tabindex="1">
+            <option value="">Select Bus</option>
+            <option value="1">Bus 001</option>
+            <option value="2">Bus 002</option>
+            <option value="3">Bus 003</option>
+        </select>
+        <div class="error" id="busIdError">Bus ID is required.</div>
+
+        <label for="driver">Driver:</label>
+        <select id="driver" required tabindex="2">
+            <option value="">Select Driver</option>
+            <option value="d1">Garry Sarmiento</option>
+            <option value="d2">Adoremos Ashley</option>
+        </select>
+        <div class="error" id="driverError">Driver is required.</div>
+
+        <label for="conductor">Conductor:</label>
+        <select id="conductor" required tabindex="3">
+            <option value="">Select Conductor</option>
+            <option value="c1">Carl Nueva</option>
+            <option value="c2">Arjie Dela Cruz</option>
+        </select>
+        <div class="error" id="conductorError">Conductor is required.</div>
+
+        <label for="departureTime">Departure Time:</label>
+        <input type="time" id="departureTime" required tabindex="4" placeholder="Select departure time">
+        <div class="error" id="departureTimeError">Departure time is required and must be before arrival.</div>
+
+        <label for="arrivalTime">Arrival Time:</label>
+        <input type="time" id="arrivalTime" required tabindex="5" placeholder="Select arrival time">
+        <div class="error" id="arrivalTimeError">Arrival time is required.</div>
+
+        <label for="numTrips">Number of Trips:</label>
+        <input type="number" id="numTrips" min="1" required tabindex="6" placeholder="Enter number of trips">
+        <div class="error" id="numTripsError">Number of trips must be at least 1.</div>
+
+        <label for="tripDate">Trip Date:</label>
+        <input type="date" id="tripDate" required tabindex="7" placeholder="Select trip date">
+        <div class="error" id="tripDateError">Trip date is required and cannot be in the future.</div>
+
+        <label for="grossIncome">Gross Income:</label>
+        <input type="number" id="grossIncome" min="0" max="999999" required tabindex="8" placeholder="Enter gross income in PHP">
+        <div class="error" id="grossIncomeError">Gross income must be a positive number.</div>
+
+        <label for="remarks">Remarks:</label>
+        <textarea id="remarks" tabindex="9" placeholder="Enter additional notes"></textarea>
+
+        <button type="submit" tabindex="10">Save Trip Details</button>
+        <button type="reset" tabindex="11">Reset</button>
+    </form>
+
+    <script>
+        // Trip Form Validation
+        document.getElementById('tripForm').addEventListener('submit', function(e) {
+            let valid = true;
+
+            // Required fields
+            ['busId', 'driver', 'conductor', 'departureTime', 'arrivalTime', 'numTrips', 'tripDate', 'grossIncome'].forEach(id => {
+                const elem = document.getElementById(id);
+                const error = document.getElementById(id + 'Error');
+                if (!elem.value) {
+                    error.style.display = 'block';
+                    valid = false;
+                } else {
+                    error.style.display = 'none';
+                }
+            });
+
+            // Departure before arrival
+            const dep = document.getElementById('departureTime').value;
+            const arr = document.getElementById('arrivalTime').value;
+            if (dep && arr && dep >= arr) {
+                document.getElementById('departureTimeError').style.display = 'block';
+                valid = false;
+            }
+
+            // Trip date not future
+            const today = new Date().toISOString().split('T')[0];
+            if (document.getElementById('tripDate').value > today) {
+                document.getElementById('tripDateError').style.display = 'block';
+                valid = false;
+            }
+
+            // Num trips min 1
+            if (document.getElementById('numTrips').value < 1) {
+                document.getElementById('numTripsError').style.display = 'block';
+                valid = false;
+            }
+
+            if (!valid) e.preventDefault();
+            else {
+                // Simulate DB save
+                console.log('Trip data saved:', {
+                    busId: document.getElementById('busId').value,
+                    driver: document.getElementById('driver').value,
+                    conductor: document.getElementById('conductor').value,
+                    departureTime: document.getElementById('departureTime').value,
+                    arrivalTime: document.getElementById('arrivalTime').value,
+                    numTrips: document.getElementById('numTrips').value,
+                    tripDate: document.getElementById('tripDate').value,
+                    grossIncome: document.getElementById('grossIncome').value,
+                    remarks: document.getElementById('remarks').value
+                });
+                alert('Trip details saved!');
+            }
+        });
+    </script>
+</body>
+</html>

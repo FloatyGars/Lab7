@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration</title>
+  <link rel="stylesheet" href="form.css">
+</head>
+<body>
+
+  <form id="registrationForm" novalidate>
+  <h2>Create Account</h2>
+
+  <!-- Full Name -->
+  <label for="fullname">Full Name</label>
+  <input type="text" id="fullname" name="fullname" placeholder="Juan Dela Cruz" required>
+  <small class="error-message"></small>
+
+  <!-- Email -->
+  <label for="email">Email Address</label>
+  <input type="email" id="email" name="email" placeholder="name@example.com" required>
+  <small class="error-message"></small>
+
+  <!-- Password -->
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" minlength="8" required>
+  <small class="error-message"></small>
+
+  <!-- Confirm Password -->
+  <label for="confirmPassword">Confirm Password</label>
+  <input type="password" id="confirmPassword" name="confirmPassword" required>
+  <small class="error-message"></small>
+
+  <!-- Birthdate -->
+<label for="birthdate">Birthdate</label>
+<input type="date" id="birthdate" name="birthdate" required>
+<small class="error-message"></small>
+
+<!-- LIVE AGE DISPLAY -->
+<p id="ageDisplay" style="font-size: 14px; margin-top: 4px; color: #444;"></p>
+
+ <!-- Dropdown -->
+<label for="role">Account Type</label>
+<select id="role" name="role" required>
+  <option value="" disabled selected>Select account type</option>
+  <option value="staff">Staff</option>
+  <option value="admin">Admin</option>
+</select>
+<small class="error-message"></small>
+
+  <!-- Radio Buttons -->
+  <fieldset>
+    <legend>Gender</legend>
+    <label><input type="radio" name="gender" value="male" required> Male</label>
+    <label><input type="radio" name="gender" value="female" required> Female</label>
+  </fieldset>
+  <small class="error-message"></small>
+
+  <!-- Checkbox -->
+  <label>
+    <input type="checkbox" id="terms" required>
+    I accept the Terms & Conditions
+  </label>
+  <small class="error-message"></small>
+
+  <button type="submit">Register</button>
+</form>
+
+  <script src="form.js"></script>
+</body>
+</html>

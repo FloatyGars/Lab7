@@ -1,0 +1,87 @@
+/* Center form nicely in the page */
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Form container */
+form {
+  width: 380px;
+  padding: 28px 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Form title */
+form h2 {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+/* Input + label spacing */
+label {
+  margin-top: 14px;
+  display: block;
+  font-weight: 600;
+}
+
+/* Inputs spacing + styling */
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #cfcfcf;
+  font-size: 15px;
+  box-sizing: border-box; /* prevents layout issues */
+}
+
+/* Slight spacing inside fieldset (radio buttons) */
+fieldset {
+  border: none;
+  padding: 5px 0 0;
+  margin-top: 10px;
+}
+
+fieldset label {
+  font-weight: normal;
+  margin-right: 15px;
+}
+
+/* Checkbox label alignment */
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
+
+/* Error message spacing */
+.error-message {
+  color: #d10000;
+  font-size: 12px;
+  min-height: 14px;
+  margin-top: 3px;
+}
+
+/* Submit button */
+button {
+  margin-top: 24px;
+  padding: 14px;
+  width: 100%;
+  background: #0066ff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #004dcc;
+}
